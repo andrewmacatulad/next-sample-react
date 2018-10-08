@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "node server/app.js",
+    "start": "NODE_ENV=production node server/app.js",
     "server": "nodemon server/app.js"
   },
   "author": "",
@@ -18,8 +18,11 @@
     "connect-mongo": "^2.0.1",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "express-http-proxy": "^1.4.0",
     "express-session": "^1.15.6",
     "file-loader": "^2.0.0",
+    "final-form": "^4.10.0",
+    "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "mongoose": "^5.2.17",
@@ -31,7 +34,9 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "react": "^16.5.2",
+    "react-cookies": "^0.1.0",
     "react-dom": "^16.5.2",
+    "react-final-form": "^3.6.6",
     "react-helmet": "^5.2.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
@@ -41,6 +46,7 @@
     "semantic-ui-css": "^2.4.0",
     "semantic-ui-react": "^0.82.5",
     "sitemap": "^2.0.1",
+    "slug": "^0.9.1",
     "url-loader": "^1.1.1",
     "uuid": "^3.3.2"
   }

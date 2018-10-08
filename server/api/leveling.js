@@ -35,7 +35,6 @@ module.exports = app => {
     // }
     // res.status(404).json({ error: "Error" });
     await console.log("Auth", req.isAuthenticated());
-    await console.log("API", req.user);
     res.json(req.user);
   });
 };

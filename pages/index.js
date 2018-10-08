@@ -4,8 +4,10 @@ import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import Link from "next/link";
-import Router from "next/router";
+import { Link, Router } from "../routes";
+
+// import Link from "next/link";
+// import Router from "next/router";
 // import { Link, Router } from "../routes";
 import { getAllLevels, getProfile, GET_PROFILE } from "../actions";
 import Levels from "../components/Levels";
@@ -22,51 +24,15 @@ class HomePage extends Component {
     //   await store.dispatch(getProfile());
     // }
     if (isServer) {
-      // await Promise.all([
-      //   store.dispatch(getAllLevels()),
-      //   store.dispatch(getProfile())
-      // ]);
-      // const url = "http://localhost:3000/api/me";
-      // await store.dispatch(getAllLevels());
-      // // await store.dispatch(getProfile());
-      // const options = {
-      //   method: "GET",
-      //   headers: req.headers.cookie,
-      //   url
-      // };
-      //await store.dispatch(getAllLevels());
-      // await store.dispatch(axios(options));
-      //   const res = await fetch("http://localhost:3000/api/me", {
-      //     headers: {
-      //       cookie: req.headers.cookie
-      //     }
-      //   });
-      //   console.log(res);
+      store.dispatch(getProfile());
+      store.dispatch(getAllLevels());
     }
 
-    console.log(req.headers.cookie);
-
-    const user = await axios.get("http://localhost:3000/api/me", {
-      headers: {
-        Accept: "application/json",
-        Cookie: req.headers.cookie
-      }
-    });
-    console.log("User", user.data);
-    store.dispatch({
-      type: GET_PROFILE,
-      payload: user.data
-    });
+    //console.log(req.headers.cookie);
 
     if (req) {
       Helmet.renderStatic();
     }
-
-    // const testState = store.getState();
-    // await store.dispatch(getProfile());
-    // console.log("Server", isServer);
-    // console.log("Pathname", pathname);
-    // console.log("Query", query);
 
     console.log("State", store.getState());
 
@@ -78,7 +44,7 @@ class HomePage extends Component {
   render() {
     const { levels, title, description, profile } = this.props;
     // console.log(levels[0]);
-    console.log("Profile", profile);
+    console.log("Profile", profile.user);
 
     return (
       <div>
