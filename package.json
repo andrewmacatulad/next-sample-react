@@ -6,15 +6,15 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "NODE_ENV=production node server/app.js",
-    "server": "nodemon server/app.js"
+    "start": "NODE_ENV=production node server.js",
+    "server": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zeit/next-css": "^1.0.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
     "connect-mongo": "^2.0.1",
     "cors": "^2.8.4",
     "express": "^4.16.3",
@@ -28,6 +28,8 @@
     "mongoose": "^5.2.17",
     "morgan": "^1.9.1",
     "next": "^7.0.0",
+    "next-manifest": "^1.6.0",
+    "next-offline": "^3.0.2",
     "next-redux-wrapper": "^2.0.0",
     "next-routes": "^1.4.2",
     "node-fetch": "^2.2.0",
@@ -47,7 +49,14 @@
     "semantic-ui-react": "^0.82.5",
     "sitemap": "^2.0.1",
     "slug": "^0.9.1",
+    "sw-precache-webpack-plugin": "^0.11.5",
     "url-loader": "^1.1.1",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "next-purgecss": "^1.0.3",
+    "next-workbox-webpack-plugin": "^1.1.0",
+    "webpack-pwa-manifest": "^3.7.1"
   }
 }

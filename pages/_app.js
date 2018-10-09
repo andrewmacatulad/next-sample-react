@@ -6,7 +6,7 @@ import App, { Container } from "next/app";
 import withRedux from "next-redux-wrapper";
 import { initStore } from "../store";
 import Layout from "../components/layout/layout";
-import { getProfile } from "../actions";
+import OfflineSupport from "../components/OfflineSupport";
 
 export default withRedux(initStore)(
   class MyApp extends App {
@@ -24,6 +24,7 @@ export default withRedux(initStore)(
         <Container>
           <Provider store={store}>
             <Layout>
+              <OfflineSupport />
               <Component {...pageProps} />
             </Layout>
           </Provider>

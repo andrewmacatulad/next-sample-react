@@ -45,7 +45,7 @@ export default class MyDocument extends Document {
         <Head>
           {this.helmetJsx}
           {this.helmetHeadComponents}
-          <link rel="stylesheet" href="/_next/static/style.css" />
+          {/* <link rel="stylesheet" href="/_next/static/style.css" /> */}
         </Head>
         <body {...this.helmetBodyAttrComponents}>
           <Main />

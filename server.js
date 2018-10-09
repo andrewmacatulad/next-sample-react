@@ -8,16 +8,20 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
 const slug = require("slug");
-const sitemapAndRobots = require("./sitemapAndRobots");
+const compression = require("compression");
+const { join } = require("path");
+const { parse } = require("url");
 
-const routes = require("../routes");
+const sitemapAndRobots = require("./server/sitemapAndRobots");
 
-require("./models/Post");
-require("./models/Tags");
-require("./models/Category");
-require("./models/Level");
-require("./models/User");
-require("./passport/passport");
+const routes = require("./routes");
+
+require("./server/models/Post");
+require("./server/models/Tags");
+require("./server/models/Category");
+require("./server/models/Level");
+require("./server/models/User");
+require("./server/passport/passport");
 
 const Level = mongoose.model("levels");
 const User = mongoose.model("users");
@@ -40,6 +44,16 @@ const handler = routes.getRequestHandler(app);
 // Nextjs's server prepared
 app.prepare().then(() => {
   const server = express();
+  // if (!dev) {
+  //   server.use(compression());
+  // }
+
+  // server.use("/service-worker.js", (req, res) => {
+  //   const parsedUrl = parse(req.url, true);
+  //   const { pathname } = parsedUrl;
+  //   const filePath = join(__dirname, ".next", pathname);
+  //   app.serveStatic(req, res, filePath);
+  // });
 
   // server.use(handler);
   //server.use(morgan("combined"));
@@ -71,14 +85,28 @@ app.prepare().then(() => {
   // });
   server.use(passport.initialize());
   server.use(passport.session());
-  require("./api/leveling")(server);
-  require("./api/authRoutes")(server);
-  require("./api/postRoutes")(server);
+  require("./server/api/leveling")(server);
+  require("./server/api/authRoutes")(server);
+  require("./server/api/postRoutes")(server);
 
   sitemapAndRobots({ server });
 
+  // server.get("*", (req, res) => {
+  //   return handler(req, res);
+  // });
+
   server.get("*", (req, res) => {
-    return handler(req, res);
+    console.log("ReqURL ", req.url);
+    if (req.url.includes("/sw")) {
+      const filePath = join(__dirname, "static", "workbox", "sw.js");
+      console.log("Filepath ", filePath);
+      app.serveStatic(req, res, filePath);
+    } else if (req.url.startsWith("static/workbox/")) {
+      app.serveStatic(req, res, join(__dirname, req.url));
+    } else {
+      return handler(req, res, req.url);
+      // handle(req, res, req.url);
+    }
   });
 
   // starting express server
