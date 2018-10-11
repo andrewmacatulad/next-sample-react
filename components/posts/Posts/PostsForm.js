@@ -7,6 +7,7 @@ import * as Semantic from "semantic-ui-react";
 import SelectInput from "../../common/SelectInput";
 import TextInput from "../../common/TextInput";
 import TextArea from "../../common/TextArea";
+import { Router } from "../../../routes";
 
 import LoadingComponent from "../../layout/LoadingComponent";
 import isEmpty from "../../../lib/validation/is-empty";
@@ -30,6 +31,7 @@ class PostForm extends Component {
   onSubmit = async values => {
     console.log(values);
     this.props.createPost(values);
+    Router.replace("/");
   };
   render() {
     const { categories, tags } = this.props;

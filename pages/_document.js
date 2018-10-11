@@ -41,7 +41,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html {...this.helmetHtmlAttrComponents}>
+      <html lang="en" {...this.helmetHtmlAttrComponents}>
         <Head>
           {this.helmetJsx}
           {this.helmetHeadComponents}

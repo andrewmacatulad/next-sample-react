@@ -24,7 +24,7 @@ export default withRedux(initStore)(
         <Container>
           <Provider store={store}>
             <Layout>
-              <OfflineSupport />
+              {/* <OfflineSupport /> */}
               <Component {...pageProps} />
             </Layout>
           </Provider>

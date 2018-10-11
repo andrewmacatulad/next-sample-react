@@ -38,15 +38,15 @@ mongoose.connect("mongodb://localhost:27017/next-project-site");
 
 const app = next({ dev });
 
-//const handle = app.getRequestHandler();
+const handle = app.getRequestHandler();
 const handler = routes.getRequestHandler(app);
 
 // Nextjs's server prepared
 app.prepare().then(() => {
   const server = express();
-  // if (!dev) {
-  //   server.use(compression());
-  // }
+  if (!dev) {
+    server.use(compression());
+  }
 
   // server.use("/service-worker.js", (req, res) => {
   //   const parsedUrl = parse(req.url, true);
@@ -95,14 +95,31 @@ app.prepare().then(() => {
   //   return handler(req, res);
   // });
 
+  // server.get("*", (req, res) => {
+  //   console.log("ReqURL ", req.url);
+  //   if (req.url.includes("/sw")) {
+  //     const filePath = join(__dirname, "static", "workbox", "sw.js");
+  //     console.log("Filepath ", filePath);
+  //     app.serveStatic(req, res, filePath);
+  //   } else if (req.url.startsWith("static/workbox/")) {
+  //     app.serveStatic(req, res, join(__dirname, req.url));
+  //   } else {
+  //     return handle(req, res, req.url);
+  //     // handle(req, res, req.url);
+  //   }
+  // });
+
   server.get("*", (req, res) => {
-    console.log("ReqURL ", req.url);
-    if (req.url.includes("/sw")) {
-      const filePath = join(__dirname, "static", "workbox", "sw.js");
-      console.log("Filepath ", filePath);
+    // console.log("ReqURL ", req.url);
+    if (req.url.includes("/service-worker")) {
+      const parsedUrl = parse(req.url, true);
+      const { pathname } = parsedUrl;
+      const filePath = join(__dirname, ".next", pathname);
+
+      // console.log("Path", filePath);
       app.serveStatic(req, res, filePath);
-    } else if (req.url.startsWith("static/workbox/")) {
-      app.serveStatic(req, res, join(__dirname, req.url));
+      // } else if (req.url.startsWith('static/workbox/')) {
+      //   app.serveStatic(req, res, join(__dirname, req.url));
     } else {
       return handler(req, res, req.url);
       // handle(req, res, req.url);

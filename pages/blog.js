@@ -68,10 +68,14 @@ export default class extends React.Component {
             src="https://pbs.twimg.com/profile_images/1000303810642837504/LQmBgJmU_400x400.jpg"
             size="medium"
           />
+          {post.postDescription ? (
+            <Segment>
+              <p>{post.postDescription}</p>
+            </Segment>
+          ) : (
+            ""
+          )}
 
-          <Segment>
-            <p>{post.postDescription}</p>
-          </Segment>
           <Divider />
 
           <Segment>
