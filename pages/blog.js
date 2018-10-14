@@ -1,19 +1,24 @@
 import React from "react";
 import Helmet from "react-helmet";
-import { Segment, Image, Container, Header, Divider } from "semantic-ui-react";
+import {
+  Segment,
+  Image,
+  Container,
+  Header,
+  Divider,
+  Button
+} from "semantic-ui-react";
 
+import { Link, Router } from "../routes";
+import isEmpty from "../lib/validation/is-empty";
 import { getAllPosts } from "../components/posts/Posts/postsAction";
-const posts = [
-  { sample: "hello-world", title: "Hello world" },
-  { sample: "another-blog-post", title: "Another blog post" },
-  { sample: "test", title: "Test" },
-  { sample: "testing", title: "Testing" }
-];
+import { getProfile } from "../actions";
 
 export default class extends React.Component {
   static async getInitialProps({ req, isServer, query, res, store }) {
     if (isServer) {
       await store.dispatch(getAllPosts());
+      await store.dispatch(getProfile());
     }
     if (req) {
       Helmet.renderStatic();
@@ -21,6 +26,7 @@ export default class extends React.Component {
     // console.log("Blog ", store.getState().posts.posts);
     // console.log(query.samples);
     const postsList = store.getState().posts.posts;
+    // console.log("Blog Profile ", store.getState().profile);
     // posts.find(post =>
     //   console.log(
     //     "Post",
@@ -43,13 +49,14 @@ export default class extends React.Component {
       res.statusCode = 404;
     }
 
-    return { post };
+    return { post, params: query.samples, user: store.getState().profile.user };
   }
 
   render() {
-    const { post } = this.props;
-    console.log(post);
-
+    const { post, user, params } = this.props;
+    // console.log(post);
+    console.log("User blog ", user);
+    console.log(isEmpty(user.admin));
     if (!post) return <h1>Post not found</h1>;
 
     return (
@@ -59,6 +66,7 @@ export default class extends React.Component {
             <title>{post.postTitle} Download Watch Episodes Free </title>
             <meta name="description" content={`${post.postDescription}`} />
           </Helmet>
+          <Button onClick={() => Router.back()}>Back</Button>
           <Header textAlign="center" as="h1">
             {post.postTitle}
           </Header>
@@ -68,6 +76,14 @@ export default class extends React.Component {
             src="https://pbs.twimg.com/profile_images/1000303810642837504/LQmBgJmU_400x400.jpg"
             size="medium"
           />
+          {user.admin ? (
+            <Link href={`/blog/${params}/edit`}>
+              <Button>Edit</Button>
+            </Link>
+          ) : (
+            ""
+          )}
+
           {post.postDescription ? (
             <Segment>
               <p>{post.postDescription}</p>

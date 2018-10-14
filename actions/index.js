@@ -29,7 +29,6 @@ export const getProfile = () => async (dispatch, getState, api) => {
   dispatch(asyncActionStart());
   try {
     const user = await api.get("http://localhost:3000/api/me");
-    console.log(user.data);
     dispatch({
       type: GET_PROFILE,
       payload: user.data

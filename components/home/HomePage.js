@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, Button, Image } from "semantic-ui-react";
 
+import { Link } from "../../routes";
+
 const HomePage = ({ post }) => {
   return (
     <Card>
@@ -14,7 +16,12 @@ const HomePage = ({ post }) => {
         }
       />
       <Card.Content as="h3" textAlign="center">
-        <Card.Header content={post.postTitle} />
+        <Card.Header>
+          <Link route="blog" params={{ samples: post.postSlug }}>
+            {/* <Menu.Item as="a">Blog Test</Menu.Item> */}
+            {post.postTitle}
+          </Link>
+        </Card.Header>
         <Card.Description>
           {post.postDescription ? post.postDescription.substring(0, 100) : ""}
         </Card.Description>

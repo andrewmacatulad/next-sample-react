@@ -29,6 +29,29 @@ export const createPost = values => async (dispatch, getState, api) => {
   }
 };
 
+export const editPost = (values, postId) => async (dispatch, getState, api) => {
+  //   console.log(values);
+  //   console.log("Action ", getState().profile.user._id);
+  dispatch(asyncActionStart());
+
+  try {
+    const post = await api.patch("/api/post", {
+      userId: getState().profile.user._id,
+      postId,
+      postTitle: values.postTitle,
+      postDescription: values.postDescription,
+      postCategory: values.postCategory,
+      postTags: values.postTags,
+      postDownloadLinks: values.postDownloadLinks
+    });
+
+    console.log("Successfully updated the post", post);
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(asyncActionError());
+  }
+};
+
 export const getAllPosts = () => async (dispatch, getState, api) => {
   dispatch(asyncActionStart());
 

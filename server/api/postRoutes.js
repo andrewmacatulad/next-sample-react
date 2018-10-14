@@ -115,6 +115,34 @@ module.exports = app => {
       res.send(400, err);
     }
   });
+
+  app.patch("/api/post", async (req, res) => {
+    const {
+      userId,
+      postId,
+      postTitle,
+      postDescription,
+      postCategory,
+      postTags,
+      postDownloadLinks
+    } = req.body;
+    const postSlug = slug(postTitle, { lower: true });
+
+    const post = await Post.findByIdAndUpdate(
+      { _id: postId, user: userId },
+      {
+        postTitle,
+        postDescription,
+        postCategory,
+        postTags,
+        postSlug,
+        postDownloadLinks
+      }
+    ).exec();
+
+    res.json(post);
+  });
+
   app.get("/sample", (req, res) => {
     console.log(slug("Test lan zxxc D ada123 zcx. ? @! as", { lower: true }));
     res.send(slug("Test lan zxxc D ada123 zcx. ? @! as", { lower: true }));

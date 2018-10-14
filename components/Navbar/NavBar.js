@@ -7,11 +7,14 @@ import { Link, Router } from "../../routes";
 // import Link from "next/link";
 // import SignedInMenu from "../Menus/SignedInMenu";
 import { removeUser } from "../../actions";
+import isEmpty from "../../lib/validation/is-empty";
 
-const mapStateToProps = state => ({
-  user: state.user,
-  loading: state.async.loading
-});
+const mapStateToProps = state => {
+  return {
+    user: state.profile,
+    loading: state.async.loading
+  };
+};
 class NavBar extends Component {
   handleSignOut = () => {
     this.props.removeUser();
@@ -26,7 +29,7 @@ class NavBar extends Component {
     }
   }
   render() {
-    // const { auth } = this.props;
+    const { user } = this.props;
     // // const authenticated = auth.isLoaded && !auth.isEmpty;
     // // if (!auth) {
     // //   return <h2>Loading</h2>;
@@ -34,6 +37,7 @@ class NavBar extends Component {
     // if (!auth) {
     //   return <LoadingComponent />;
     // }
+    // console.log("Nav ", user.isAuthenticated);
     return (
       <div>
         <Head>
@@ -44,11 +48,22 @@ class NavBar extends Component {
         </Head>
         <Menu stackable inverted size="massive">
           <Container>
-            <Menu.Item header>
+            <Menu.Item as="h1" header>
               <Link href="/">
                 <Menu.Item as="a">Next Site</Menu.Item>
               </Link>
             </Menu.Item>
+
+            {!user.isAuthenticated ? (
+              <Menu.Item>
+                <Link href="/auth/google">
+                  <Menu.Item as="a">Logged In</Menu.Item>
+                </Link>
+              </Menu.Item>
+            ) : (
+              <Menu.Item onClick={this.handleSignOut} name="Signout" />
+            )}
+
             {/* {auth.user && auth.user ? (
             <SignedInMenu auth={auth.user} signOut={this.handleSignOut} />
           ) : (

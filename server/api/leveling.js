@@ -34,7 +34,7 @@ module.exports = app => {
     //   return res.send(await req.session.passport);
     // }
     // res.status(404).json({ error: "Error" });
-    await console.log("Auth", req.isAuthenticated());
+    // console.log("Auth", req.isAuthenticated());
     res.json(req.user);
   });
 };
