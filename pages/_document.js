@@ -46,6 +46,10 @@ export default class MyDocument extends Document {
           {this.helmetJsx}
           {this.helmetHeadComponents}
           {/* <link rel="stylesheet" href="/_next/static/style.css" /> */}
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"
+          />
         </Head>
         <body {...this.helmetBodyAttrComponents}>
           <Main />

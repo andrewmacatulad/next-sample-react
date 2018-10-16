@@ -82,8 +82,14 @@ module.exports = app => {
       // postImageUrl,
       postCategory,
       postTags,
-      postDownloadLinks
+      postDownloadLinks,
+      postHdDownloadLinks,
+      postStreamLinks,
+      postSubsLinks,
+      postSubtitle
     } = req.body;
+
+    // console.log(req.body);
 
     // user
     // postTitle
@@ -92,8 +98,6 @@ module.exports = app => {
     // postCategory
     // postTags
     // postSlug
-
-    console.log(req.body.postTags);
 
     const postSlug = slug(postTitle, { lower: true });
 
@@ -105,7 +109,11 @@ module.exports = app => {
       postCategory,
       postTags,
       postSlug,
-      postDownloadLinks
+      postDownloadLinks,
+      postHdDownloadLinks,
+      postStreamLinks,
+      postSubsLinks,
+      postSubtitle
     });
 
     try {

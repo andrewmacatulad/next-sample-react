@@ -19,7 +19,11 @@ export const createPost = values => async (dispatch, getState, api) => {
       postDescription: values.postDescription,
       postCategory: values.postCategory,
       postTags: values.postTags,
-      postDownloadLinks: values.postDownloadLinks
+      postDownloadLinks: values.postDownloadLinks,
+      postHdDownloadLinks: values.postHdDownloadLinks,
+      postStreamLinks: values.postStreamLinks,
+      postSubsLinks: values.postSubsLinks,
+      postSubtitle: values.postSubtitle
     });
 
     console.log("Success ", post);
@@ -42,7 +46,11 @@ export const editPost = (values, postId) => async (dispatch, getState, api) => {
       postDescription: values.postDescription,
       postCategory: values.postCategory,
       postTags: values.postTags,
-      postDownloadLinks: values.postDownloadLinks
+      postDownloadLinks: values.postDownloadLinks,
+      postHdDownloadLinks: values.postHdDownloadLinks,
+      postStreamLinks: values.postStreamLinks,
+      postSubsLinks: values.postSubsLinks,
+      postSubtitle: values.postSubtitle
     });
 
     console.log("Successfully updated the post", post);

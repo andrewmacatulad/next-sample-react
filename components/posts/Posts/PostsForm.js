@@ -7,6 +7,7 @@ import * as Semantic from "semantic-ui-react";
 import SelectInput from "../../common/SelectInput";
 import TextInput from "../../common/TextInput";
 import TextArea from "../../common/TextArea";
+import CheckInput from "../../common/CheckInput";
 import { Router } from "../../../routes";
 
 import LoadingComponent from "../../layout/LoadingComponent";
@@ -27,11 +28,22 @@ const Error = ({ name }) => (
 
 const required = value => (value ? undefined : "Required");
 
+const types = [
+  { text: "Series", value: "series" },
+  { text: "Movie", value: "movie" },
+  { text: "Special/Ova", value: "special" }
+];
+
+const downloadTypes = [
+  { text: "Episodes", value: "episodes" },
+  { text: "Part", value: "part" },
+  { text: "Solo", value: "solo" }
+];
 class PostForm extends Component {
   onSubmit = async values => {
     console.log(values);
-    this.props.createPost(values);
-    Router.replace("/");
+    // this.props.createPost(values);
+    // Router.replace("/");
   };
   render() {
     const { categories, tags } = this.props;
@@ -59,21 +71,10 @@ class PostForm extends Component {
       <Segment>
         <Form
           onSubmit={this.onSubmit}
-          // initialValues={{
-          //   // email: profile.email,
-          //   // name: profile.name,
-          //   // street: profile.address.street,
-          //   // city: profile.address.city,
-          //   // state: profile.address.state,
-          //   // zip: profile.address.zip,
-          //   // gender: tagTest
-          //   // month: !isEmpty(profile.birthDate)
-          //   //   ? profile.birthDate.slice(0, 2)
-          //   //   : "01",
-          //   // // day: profile.birthDate.slice(4, 6),
-          //   // year: profile.birthYear,
-          //   // partCopy: this.state.partyC
-          // }}
+          initialValues={{
+            postType: "series",
+            postDownloadType: "episodes"
+          }}
           render={({
             handleSubmit,
             reset,
@@ -93,6 +94,17 @@ class PostForm extends Component {
                   validate={required}
                 />
                 <Error name="postTitle" />
+              </div>
+              <div>
+                <label>File</label>
+                <Field
+                  name="postFile"
+                  component={TextInput}
+                  type="file"
+                  placeholder="File"
+                  accept="image/*"
+                />
+                <Error name="postFile" />
               </div>
               <div>
                 <label>Description</label>
@@ -123,7 +135,34 @@ class PostForm extends Component {
                   validate={required}
                   width={9}
                 />
+                <Field
+                  fluid
+                  name="postType"
+                  options={types}
+                  component={SelectInput}
+                  validate={required}
+                  width={9}
+                />
+                <Field
+                  fluid
+                  name="postDownloadType"
+                  options={downloadTypes}
+                  component={SelectInput}
+                  validate={required}
+                  width={9}
+                />
               </SemanticForm.Group>
+              <div>
+                <label>Subtitle</label>
+                <Field
+                  name="postSubtitle"
+                  component={TextInput}
+                  type="text"
+                  placeholder="Subtitle"
+                  validate={required}
+                />
+                <Error name="postSubtitle" />
+              </div>
               <div>
                 <label>Download Links</label>
                 <Field
@@ -133,11 +172,33 @@ class PostForm extends Component {
                 />
                 <Error name="postDownloadLinks" />
               </div>
-              {/* <div>
-                <label>Party Copy</label>
-                <Field name="partCopy" component={TextArea} />
-                <Error name="partCopy" />
-              </div> */}
+              <div>
+                <label>HD Download Links</label>
+                <Field
+                  name="postHdDownloadLinks"
+                  component={TextArea}
+                  placeholder="Please enter the HD download Links"
+                />
+                <Error name="postHdDownloadLinks" />
+              </div>
+              <div>
+                <label>Stream Links</label>
+                <Field
+                  name="postStreamLinks"
+                  component={TextArea}
+                  placeholder="Please enter the stream Links"
+                />
+                <Error name="postStreamLinks" />
+              </div>
+              <div>
+                <label>Subtitle Links</label>
+                <Field
+                  name="postSubsLinks"
+                  component={TextArea}
+                  placeholder="Please enter the subtitles Links"
+                />
+                <Error name="postSubsLinks" />
+              </div>
               <div className="buttons">
                 <Button
                   positive

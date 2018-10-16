@@ -7,6 +7,7 @@ const PostSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
+  postImageUrl: String,
   postTitle: {
     type: String,
     required: true
@@ -30,6 +31,10 @@ const PostSchema = new Schema({
       ref: "tags"
     }
   ],
+  postHdDownloadLinks: { type: String },
+  postStreamLinks: { type: String },
+  postSubsLinks: { type: String },
+  postSubtitle: { type: String },
   postSlug: {
     type: String
   },

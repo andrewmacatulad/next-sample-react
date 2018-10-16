@@ -1,4 +1,4 @@
-import "semantic-ui-css/semantic.min.css";
+// import "semantic-ui-css/semantic.min.css";
 import "./index.css";
 import React from "react";
 import { Provider } from "react-redux";
