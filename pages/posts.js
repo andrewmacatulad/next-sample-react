@@ -1,12 +1,12 @@
 import React from "react";
-import PostsForm from "../components/posts/Posts/PostsForm";
+import PostDashboard from "../components/posts/Posts/PostDashboard";
 
-const Posts = () => {
+const PostDashboardList = () => {
   return (
     <div>
-      <PostsForm />
+      <PostDashboard />
     </div>
   );
 };
 
-export default Posts;
+export default PostDashboardList;

@@ -3,14 +3,17 @@ import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 import * as Semantic from "semantic-ui-react";
 
-import { Router } from "../routes";
-import SelectInput from "../components/common/SelectInput";
-import TextInput from "../components/common/TextInput";
-import TextArea from "../components/common/TextArea";
-import { getAllPosts, editPost } from "../components/posts/Posts/postsAction";
-import { getProfile } from "../actions";
-import { getCategory } from "../components/posts/Category/categoryAction";
-import { getTags } from "../components/posts/Tags/tagsAction";
+import { Router } from "../../routes";
+import SelectInput from "../../components/common/SelectInput";
+import TextInput from "../../components/common/TextInput";
+import TextArea from "../../components/common/TextArea";
+import {
+  getAllPosts,
+  editPost
+} from "../../components/posts/Posts/postsAction";
+import { getProfile } from "../../actions";
+import { getCategory } from "../../components/posts/Category/categoryAction";
+import { getTags } from "../../components/posts/Tags/tagsAction";
 
 const { Form: SemanticForm, Segment, Button } = Semantic;
 

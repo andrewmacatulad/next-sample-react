@@ -81,7 +81,7 @@ class NavBar extends Component {
               </Link>
             </Menu.Item>
             <Menu.Item>
-              <Link href="/posts">
+              <Link href="/post/add">
                 <Menu.Item as="a">Add Post</Menu.Item>
               </Link>
             </Menu.Item>
@@ -96,7 +96,7 @@ class NavBar extends Component {
               </Link>
             </Menu.Item>
             <Menu.Item>
-              <Link href="/post-list">
+              <Link href="/posts">
                 <Menu.Item as="a">Post List</Menu.Item>
               </Link>
             </Menu.Item>
