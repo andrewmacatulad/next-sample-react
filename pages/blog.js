@@ -82,12 +82,22 @@ export default class extends React.Component {
           <Header textAlign="center" as="h1">
             {post.postTitle}
           </Header>
+          {post.postImageUrl === undefined ? (
+            <Image
+              alt={post.postTitle}
+              centered
+              src="https://pbs.twimg.com/profile_images/1000303810642837504/LQmBgJmU_400x400.jpg"
+            />
+          ) : (
+            <Image
+              alt={post.postTitle}
+              centered
+              src={`https://dnuw5gztyk1mp.cloudfront.net/fit-in/800x800/${
+                post.postImageUrl
+              }`}
+            />
+          )}
 
-          <Image
-            centered
-            src="https://pbs.twimg.com/profile_images/1000303810642837504/LQmBgJmU_400x400.jpg"
-            size="medium"
-          />
           {user.admin ? (
             <Link href={`/blog/${params}/edit`}>
               <Button>Edit</Button>

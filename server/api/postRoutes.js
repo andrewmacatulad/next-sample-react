@@ -79,7 +79,7 @@ module.exports = app => {
       user,
       postTitle,
       postDescription,
-      // postImageUrl,
+      postImageUrl,
       postCategory,
       postTags,
       postDownloadLinks,
@@ -88,8 +88,6 @@ module.exports = app => {
       postSubsLinks,
       postSubtitle
     } = req.body;
-
-    // console.log(req.body);
 
     // user
     // postTitle
@@ -105,7 +103,7 @@ module.exports = app => {
       user,
       postTitle,
       postDescription,
-      // postImageUrl,
+      postImageUrl,
       postCategory,
       postTags,
       postSlug,

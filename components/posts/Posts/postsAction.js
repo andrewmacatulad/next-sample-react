@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   asyncActionStart,
   asyncActionFinish,
@@ -6,12 +7,19 @@ import {
 
 export const GET_POSTS = "GET_POSTS";
 
-export const createPost = values => async (dispatch, getState, api) => {
+export const createPost = (values, file) => async (dispatch, getState, api) => {
   //   console.log(values);
   //   console.log("Action ", getState().profile.user._id);
   dispatch(asyncActionStart());
 
-  console.log(values.postTags);
+  const uploadConfig = await api.get("/api/upload");
+
+  const upload = await api.put(uploadConfig.data.url, file, {
+    headers: {
+      "Content-Type": file.type
+    }
+  });
+
   try {
     const post = await api.post("/api/post", {
       user: getState().profile.user._id,
@@ -23,7 +31,8 @@ export const createPost = values => async (dispatch, getState, api) => {
       postHdDownloadLinks: values.postHdDownloadLinks,
       postStreamLinks: values.postStreamLinks,
       postSubsLinks: values.postSubsLinks,
-      postSubtitle: values.postSubtitle
+      postSubtitle: values.postSubtitle,
+      postImageUrl: uploadConfig.data.key
     });
 
     console.log("Success ", post);

@@ -88,6 +88,7 @@ app.prepare().then(() => {
   require("./server/api/leveling")(server);
   require("./server/api/authRoutes")(server);
   require("./server/api/postRoutes")(server);
+  require("./server/api/uploadRoutes")(server);
 
   sitemapAndRobots({ server });
 

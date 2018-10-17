@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
-
+import Dropzone from "react-dropzone";
 import * as Semantic from "semantic-ui-react";
 
 import SelectInput from "../../common/SelectInput";
+import DropzoneInput from "../../common/DropzoneInput";
 import TextInput from "../../common/TextInput";
 import TextArea from "../../common/TextArea";
 import CheckInput from "../../common/CheckInput";
@@ -14,7 +15,7 @@ import LoadingComponent from "../../layout/LoadingComponent";
 import isEmpty from "../../../lib/validation/is-empty";
 import { createPost } from "./postsAction";
 
-const { Form: SemanticForm, Segment, Button } = Semantic;
+const { Form: SemanticForm, Segment, Button, Image, Label } = Semantic;
 
 const Error = ({ name }) => (
   <Field
@@ -40,11 +41,24 @@ const downloadTypes = [
   { text: "Solo", value: "solo" }
 ];
 class PostForm extends Component {
+  state = { preview: "" };
   onSubmit = async values => {
-    console.log(values);
-    // this.props.createPost(values);
-    // Router.replace("/");
+    this.props.createPost(values, values.postFile[0]);
+    Router.replace("/");
   };
+  // onChange = e => {
+  //   console.log(e[0].preview);
+  // };
+
+  // onChange = async e => {
+  //   e.preventDefault();
+  //   console.log(e);
+  //   this.setState({ preview: e[0].preview });
+  // };
+  onOpenImage = () => {
+    this.setState({ preview: "" });
+  };
+
   render() {
     const { categories, tags } = this.props;
 
@@ -62,7 +76,6 @@ class PostForm extends Component {
         text: category.name
       });
     });
-
     // if (!profile.address) {
     //   return <LoadingComponent />;
     // }
@@ -76,6 +89,7 @@ class PostForm extends Component {
             postDownloadType: "episodes"
           }}
           render={({
+            form,
             handleSubmit,
             reset,
             submitting,
@@ -95,17 +109,44 @@ class PostForm extends Component {
                 />
                 <Error name="postTitle" />
               </div>
-              <div>
-                <label>File</label>
-                <Field
-                  name="postFile"
-                  component={TextInput}
-                  type="file"
-                  placeholder="File"
-                  accept="image/*"
+              {this.state.preview === "" ? (
+                // <div>
+                //   <label>File</label>
+                //   <Field
+                //     name="postFile"
+                //     component={DropzoneInput}
+                //     // onChange={this.onChange}
+                //   />
+                // </div>
+                <div>
+                  <Field name="postFile">
+                    {fieldprops => (
+                      <div>
+                        <label>File</label>
+                        <Dropzone
+                          onDrop={(files, e) => {
+                            this.setState({ preview: files[0].preview });
+                            form.change("postFile", files);
+                          }}
+                        />
+                      </div>
+                    )}
+                  </Field>
+                </div>
+              ) : (
+                <Image
+                  src={this.state.preview}
+                  size="medium"
+                  onClick={this.onOpenImage}
+                  label={{
+                    as: "a",
+                    color: "black",
+                    ribbon: true,
+                    content: "Click to cancel upload"
+                  }}
+                  // onClick={this.onOpenImage}
                 />
-                <Error name="postFile" />
-              </div>
+              )}
               <div>
                 <label>Description</label>
                 <Field
@@ -117,7 +158,7 @@ class PostForm extends Component {
               </div>
               <label>Category and Tags</label>
               <SemanticForm.Group>
-                <label>Tags</label>
+                {/* <label>Tags</label>
                 <Field
                   fluid
                   name="postTags"
@@ -125,7 +166,7 @@ class PostForm extends Component {
                   options={tagsList}
                   component={SelectInput}
                   width={9}
-                />
+                /> */}
                 <label>Category</label>
                 <Field
                   fluid
