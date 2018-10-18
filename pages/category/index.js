@@ -13,6 +13,7 @@ class Category extends Component {
       Helmet.renderStatic();
     }
 
+    console.log("Category Query", query);
     return { categories: store.getState().category.category };
   }
   render() {

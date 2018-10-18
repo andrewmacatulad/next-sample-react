@@ -4,7 +4,6 @@ import { Segment } from "semantic-ui-react";
 import CategoryListItem from "./CategoryListItem";
 
 const CategoryList = ({ categories }) => {
-  console.log(categories);
   return (
     <Segment>
       {categories &&

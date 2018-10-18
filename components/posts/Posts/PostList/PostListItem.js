@@ -8,7 +8,7 @@ const PostListItem = ({ post, categP }) => {
   return (
     <List bulleted>
       <Link
-        route="posttest"
+        route="download"
         params={{ categ: categP, posttitle: post.postSlug }}
       >
         {/* <Menu.Item as="a">Blog Test</Menu.Item> */}
@@ -18,4 +18,4 @@ const PostListItem = ({ post, categP }) => {
   );
 };
 
-export default connect()(PostListItem);
+export default PostListItem;

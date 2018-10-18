@@ -6,10 +6,9 @@ import { Segment, List } from "semantic-ui-react";
 import { Link, Router } from "../../../../routes";
 
 const CategoryListItem = ({ category }) => {
-  console.log(category.slug);
   return (
     <List bulleted>
-      <Link route="post-list" params={{ categ: category.slug }}>
+      <Link route="download/post-list" params={{ categ: category.slug }}>
         {/* <Menu.Item as="a">Blog Test</Menu.Item> */}
         <List.Item>{category.name}</List.Item>
       </Link>

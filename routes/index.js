@@ -11,8 +11,8 @@ routes.add("postedit", "/blog/:samples/edit", "post/edit");
 
 // routes.add("posttest", "/category/:categ/:posttitle");
 
-routes.add("category", "/category", "category/index");
+routes.add("category", "/category", "category");
 routes.add("category-add", "/category/add", "category/new");
 
-routes.add("post-list", "/:categ");
-routes.add("posttest", "/:categ/:posttitle");
+routes.add("download/post-list", "/download/:categ");
+routes.add("download", "/download/:categ/:posttitle");

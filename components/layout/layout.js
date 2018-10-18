@@ -6,6 +6,7 @@ import { getCategory } from "../posts/Category/categoryAction";
 import { getTags } from "../posts/Tags/tagsAction";
 import LoadingComponent from "./LoadingComponent";
 import NavBar from "../Navbar/NavBar";
+import { getAllPosts } from "../posts/Posts/postsAction";
 class Layout extends Component {
   componentDidMount() {
     this.props.getAllLevels();
@@ -37,5 +38,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getAllLevels, getProfile, getCategory, getTags }
+  { getAllLevels, getProfile, getCategory, getTags, getAllPosts }
 )(Layout);
