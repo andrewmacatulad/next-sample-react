@@ -149,8 +149,31 @@ module.exports = app => {
     res.json(post);
   });
 
-  app.get("/sample", (req, res) => {
-    console.log(slug("Test lan zxxc D ada123 zcx. ? @! as", { lower: true }));
-    res.send(slug("Test lan zxxc D ada123 zcx. ? @! as", { lower: true }));
+  app.get("/api/:catId/:postId", async (req, res) => {
+    const { catId, postId } = req.params;
+
+    // console.log(catId);
+
+    const post = await Post.find({ postCategory: catId, _id: postId });
+
+    res.send(post);
   });
+
+  app.get("/api/:catSlug", async (req, res) => {
+    const { catSlug } = req.params;
+    console.log(catSlug);
+    const cat = await Category.find({ slug: catSlug });
+
+    if (cat.length === 0) {
+      return res.status(404).send([]);
+    }
+
+    const post = await Post.find({ postCategory: cat[0]._id });
+    console.log(post.length);
+    res.send(post);
+  });
+  // app.get("/sample", (req, res) => {
+  //   console.log(slug("Test lan zxxc D ada123 zcx. ? @! as", { lower: true }));
+  //   res.send(slug("Test lan zxxc D ada123 zcx. ? @! as", { lower: true }));
+  // });
 };

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PostList from "./PostList/PostList";
+import PostList from "./PostList/PostList-copy";
 
 import { getAllPosts } from "./postsAction";
 import LoadingComponent from "../../layout/LoadingComponent";

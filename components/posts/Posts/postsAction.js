@@ -6,6 +6,8 @@ import {
 } from "../../async/asyncActions";
 
 export const GET_POSTS = "GET_POSTS";
+export const GET_POST_BY_CATEGORY = "GET_POST_BY_CATEGORY";
+export const GET_POSTS_BY_CATEGORY = "GET_POSTS_BY_CATEGORY";
 
 export const createPost = (values, file) => async (dispatch, getState, api) => {
   //   console.log(values);
@@ -79,6 +81,48 @@ export const getAllPosts = () => async (dispatch, getState, api) => {
       type: GET_POSTS,
       payload: posts.data
     });
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(asyncActionError());
+  }
+};
+
+export const getPostByCategory = (categoryId, postId) => async (
+  dispatch,
+  getState,
+  api
+) => {
+  dispatch(asyncActionStart());
+
+  try {
+    const post = await api.get(`/api/:${categoryId}/:${postId}`);
+
+    dispatch({
+      type: GET_POST_BY_CATEGORY,
+      payload: post.data
+    });
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(asyncActionError());
+  }
+};
+
+export const getAllPostsInCategory = catSlug => async (
+  dispatch,
+  getState,
+  api
+) => {
+  dispatch(asyncActionStart);
+  console.log("Action slug ", catSlug);
+
+  try {
+    const post = await api.get(`/api/${catSlug}`);
+    //console.log(post);
+    dispatch({
+      type: GET_POSTS,
+      payload: post.data
+    });
+
     dispatch(asyncActionFinish());
   } catch (err) {
     dispatch(asyncActionError());

@@ -1,21 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import { Segment, List } from "semantic-ui-react";
 
 import { Link, Router } from "../../../../routes";
 
-const PostListItem = ({ post, categP }) => {
+const CategoryListItem = ({ category }) => {
+  console.log(category.slug);
   return (
     <List bulleted>
-      <Link
-        route="posttest"
-        params={{ categ: categP, posttitle: post.postSlug }}
-      >
+      <Link route="post-list" params={{ categ: category.slug }}>
         {/* <Menu.Item as="a">Blog Test</Menu.Item> */}
-        <List.Item>{post.postTitle}</List.Item>
+        <List.Item>{category.name}</List.Item>
       </Link>
     </List>
   );
 };
 
-export default connect()(PostListItem);
+export default CategoryListItem;
