@@ -3,15 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "v6.11.0"
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
+    "heroku-postbuild": "npm run build",
     "server": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "aws-sdk": "^2.335.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
@@ -56,7 +61,6 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@zeit/next-css": "^1.0.1",
     "next-purgecss": "^1.0.3",
     "next-workbox-webpack-plugin": "^1.1.0",
     "webpack-pwa-manifest": "^3.7.1"
