@@ -4,7 +4,7 @@ import {
   asyncActionStart,
   asyncActionFinish,
   asyncActionError
-} from "../../../Form Samples/rpg-social-media/src/async/asyncActions";
+} from "../components/asyncActions";
 
 export const LEVEL_LIST = "LEVEL_LIST";
 export const GET_PROFILE = "GET_PROFILE";
