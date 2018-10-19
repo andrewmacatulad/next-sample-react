@@ -13,6 +13,7 @@ const { join } = require("path");
 const { parse } = require("url");
 
 const sitemapAndRobots = require("./server/sitemapAndRobots");
+const keys = require("./config/keys");
 
 const routes = require("./routes");
 
@@ -34,7 +35,7 @@ const ROOT_URL = dev
 
 console.log(process.env.NODE_ENV);
 
-mongoose.connect("mongodb://localhost:27017/next-project-site");
+mongoose.connect(keys.mongoURI);
 
 const app = next({ dev });
 
@@ -70,7 +71,7 @@ app.prepare().then(() => {
         maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
       },
       store: new MongoStore({
-        url: "mongodb://localhost:27017/next-project-site"
+        url: keys.mongoURI
       })
     })
   );
