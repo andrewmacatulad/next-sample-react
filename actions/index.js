@@ -4,7 +4,7 @@ import {
   asyncActionStart,
   asyncActionFinish,
   asyncActionError
-} from "../components/asyncActions";
+} from "../components/async/asyncActions";
 
 export const LEVEL_LIST = "LEVEL_LIST";
 export const GET_PROFILE = "GET_PROFILE";
