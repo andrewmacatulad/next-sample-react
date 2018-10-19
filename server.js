@@ -32,7 +32,7 @@ const ROOT_URL = dev
   ? `http://localhost:${port}`
   : "https://sitemap-robots.now.sh";
 
-console.log(ROOT_URL);
+console.log(process.env.NODE_ENV);
 
 mongoose.connect("mongodb://localhost:27017/next-project-site");
 
