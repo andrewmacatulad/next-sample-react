@@ -24,6 +24,7 @@
     "compression": "^1.7.3",
     "connect-mongo": "^2.0.1",
     "cors": "^2.8.4",
+    "dotenv": "^6.1.0",
     "dotenv-webpack": "^1.5.7",
     "express": "^4.16.3",
     "express-http-proxy": "^1.4.0",
@@ -64,7 +65,6 @@
     "webpack-pwa-manifest": "^3.7.1"
   },
   "devDependencies": {
-    "dotenv": "^6.1.0",
     "next-purgecss": "^1.0.3",
     "next-workbox-webpack-plugin": "^1.1.0"
   }
