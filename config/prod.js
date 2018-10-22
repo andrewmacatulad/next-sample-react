@@ -6,5 +6,5 @@ module.exports = {
   redirectDomain: process.env.REDIRECT_DOMAIN,
   awsAccessKeyId: process.env.AMAZON_ACCESS_ID,
   awsSecretKey: process.env.AMAZON_SECRET_ACCESS_KEY,
-  redirectDomain: process.env.REDIRECT_DOMAIN
+  redirectDomain: "http://localhost:3000"
 };

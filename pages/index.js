@@ -25,6 +25,7 @@ class Home extends Component {
     if (isServer) {
       await store.dispatch(getProfile());
       await store.dispatch(getAllPosts());
+      // await store.dispatch(getAllPostsInCategory("korean-drama"));
     }
 
     //console.log(req.headers.cookie);

@@ -1,4 +1,5 @@
 const passport = require("passport");
+const keys = require("../../config/keys");
 module.exports = app => {
   // Social Media Login
   app.get(
@@ -11,8 +12,8 @@ module.exports = app => {
   app.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-      successRedirect: "http://localhost:3000",
-      failureRedirect: "http://localhost:3000/login"
+      successRedirect: keys.redirectDomain,
+      failureRedirect: `${keys.redirectDomain}/login`
     })
 
     // (req, res) => {

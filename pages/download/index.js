@@ -21,9 +21,9 @@ import { getProfile } from "../../actions";
 export default class extends React.Component {
   static async getInitialProps({ req, isServer, query, res, store }) {
     if (isServer) {
-      // await store.dispatch(getAllPosts());
+      await store.dispatch(getAllPosts());
       await store.dispatch(getProfile());
-      await store.dispatch(getAllPostsInCategory(query.categ));
+      //await store.dispatch(getAllPostsInCategory(query.categ));
     }
     if (req) {
       Helmet.renderStatic();

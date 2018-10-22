@@ -27,7 +27,10 @@ const HomePage = ({ post }) => {
 
       <Card.Content as="h3" textAlign="center">
         <Card.Header>
-          <Link route="blog" params={{ samples: post.postSlug }}>
+          <Link
+            route="download"
+            params={{ categ: post.postCategory.slug, posttitle: post.postSlug }}
+          >
             {/* <Menu.Item as="a">Blog Test</Menu.Item> */}
             {post.postTitle}
           </Link>

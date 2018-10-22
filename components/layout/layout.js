@@ -9,6 +9,7 @@ import NavBar from "../Navbar/NavBar";
 import { getAllPosts } from "../posts/Posts/postsAction";
 class Layout extends Component {
   componentDidMount() {
+    // this.props.getAllPosts();
     this.props.getProfile();
     this.props.getCategory();
     this.props.getTags();

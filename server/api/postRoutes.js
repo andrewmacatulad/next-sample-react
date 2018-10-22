@@ -67,7 +67,9 @@ module.exports = app => {
 
   app.get("/api/posts", async (req, res) => {
     try {
-      const posts = await Post.find({});
+      const posts = await Post.find({})
+        .populate("postCategory")
+        .exec();
       res.send(posts);
     } catch (err) {
       res.send(400, err);
@@ -168,7 +170,9 @@ module.exports = app => {
       return res.status(404).send([]);
     }
 
-    const post = await Post.find({ postCategory: cat[0]._id });
+    const post = await Post.find({ postCategory: cat[0]._id })
+      .populate("postCategory")
+      .exec();
     console.log(post.length);
     res.send(post);
   });

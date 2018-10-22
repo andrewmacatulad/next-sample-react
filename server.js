@@ -36,7 +36,7 @@ const ROOT_URL = dev
   : "https://sitemap-robots.now.sh";
 
 console.log(process.env.NODE_ENV);
-console.log(process.env.MONGO_URI);
+console.log(process.env.REDIRECT_DOMAIN);
 console.log(keys.mongoURI);
 
 mongoose.connect(keys.mongoURI);
