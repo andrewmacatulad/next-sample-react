@@ -17,6 +17,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 import axios from "axios";
 
+import keys from "../config/keys";
 import { rootReducer } from "../reducers";
 
 // export const initStore = (initialState = exampleInitialState) => {
@@ -35,15 +36,16 @@ import { rootReducer } from "../reducers";
 const initialState = {
   tags: { tags: [] }
 };
+
 let axiosInstance = axios.create({
-  baseURL: "http://localhost:3000"
+  baseURL: keys.redirectDomain
 });
 
 export const initStore = (initialState = initialState, options) => {
   if (options.isServer) {
     // console.log("Store options", options.req.headers.cookie);
     axiosInstance = axios.create({
-      baseURL: "http://localhost:3000",
+      baseURL: keys.redirectDomain,
       headers: { cookie: options.req.headers.cookie || "" }
     });
   }

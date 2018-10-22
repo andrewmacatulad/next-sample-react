@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Helmet from "react-helmet";
-import keys from "../../config/keys";
 import { getCategory } from "../../components/posts/Category/categoryAction";
 import CategoryList from "../../components/posts/Category/CategoryList/CategoryList";
 
@@ -18,7 +17,6 @@ class Category extends Component {
   }
   render() {
     const { categories } = this.props;
-    console.log("REDIRECT ", keys.redirectDomain);
     return (
       <div>
         <CategoryList categories={categories} />
