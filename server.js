@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const next = require("next");
 const bodyParser = require("body-parser");
@@ -29,11 +30,14 @@ const User = mongoose.model("users");
 
 const dev = process.env.NODE_ENV !== "production";
 const port = process.env.PORT || 3000;
+
 const ROOT_URL = dev
   ? `http://localhost:${port}`
   : "https://sitemap-robots.now.sh";
 
 console.log(process.env.NODE_ENV);
+console.log(process.env.MONGO_URI);
+console.log(keys.mongoURI);
 
 mongoose.connect(keys.mongoURI);
 

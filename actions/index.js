@@ -6,29 +6,13 @@ import {
   asyncActionError
 } from "../components/async/asyncActions";
 
-export const LEVEL_LIST = "LEVEL_LIST";
 export const GET_PROFILE = "GET_PROFILE";
 export const REMOVE_CURRENT_USER = "REMOVE_CURRENT_USER";
-export const getAllLevels = () => async (dispatch, getState, api) => {
-  dispatch(asyncActionStart());
-  try {
-    const levels = await api.get("/api/levels");
-    dispatch({
-      type: LEVEL_LIST,
-      payload: levels.data
-    });
-
-    dispatch(asyncActionFinish());
-  } catch (err) {
-    console.log(err);
-    dispatch(asyncActionError());
-  }
-};
 
 export const getProfile = () => async (dispatch, getState, api) => {
   dispatch(asyncActionStart());
   try {
-    const user = await api.get("http://localhost:3000/api/me");
+    const user = await api.get("/api/me");
     dispatch({
       type: GET_PROFILE,
       payload: user.data

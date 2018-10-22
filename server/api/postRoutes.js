@@ -149,7 +149,7 @@ module.exports = app => {
     res.json(post);
   });
 
-  app.get("/api/:catId/:postId", async (req, res) => {
+  app.get("/api/download/:catId/:postId", async (req, res) => {
     const { catId, postId } = req.params;
 
     // console.log(catId);
@@ -159,7 +159,7 @@ module.exports = app => {
     res.send(post);
   });
 
-  app.get("/api/:catSlug", async (req, res) => {
+  app.get("/api/download/:catSlug", async (req, res) => {
     const { catSlug } = req.params;
     console.log(catSlug);
     const cat = await Category.find({ slug: catSlug });

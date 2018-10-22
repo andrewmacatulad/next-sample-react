@@ -43,8 +43,9 @@ const downloadTypes = [
 class PostForm extends Component {
   state = { preview: "" };
   onSubmit = async values => {
-    this.props.createPost(values, values.postFile[0]);
-    Router.replace("/");
+    // console.log(values);
+    await this.props.createPost(values, values.postFile[0]);
+    // Router.replace("/");
   };
   // onChange = e => {
   //   console.log(e[0].preview);

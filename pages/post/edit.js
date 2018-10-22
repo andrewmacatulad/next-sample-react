@@ -38,6 +38,7 @@ class PostEdit extends Component {
       await store.dispatch(getTags());
     }
 
+    console.log(query);
     const postsList = store.getState().posts.posts;
 
     const post = await postsList.find(post => post.postSlug === query.samples);

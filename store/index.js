@@ -4,10 +4,6 @@
 
 // import { rootReducer } from "../reducers";
 
-// const exampleInitialState = {
-//   levels: []
-// };
-
 // export const initStore = (initialState = exampleInitialState) => {
 //   return createStore(
 //     rootReducer,
@@ -37,7 +33,7 @@ import { rootReducer } from "../reducers";
 // });
 
 const initialState = {
-  levels: []
+  tags: { tags: [] }
 };
 let axiosInstance = axios.create({
   baseURL: "http://localhost:3000"

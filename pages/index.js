@@ -10,8 +10,7 @@ import { Link, Router } from "../routes";
 // import Link from "next/link";
 // import Router from "next/router";
 // import { Link, Router } from "../routes";
-import { getAllLevels, getProfile, GET_PROFILE } from "../actions";
-import Levels from "../components/Levels";
+import { getProfile, GET_PROFILE } from "../actions";
 import redirect from "../lib/redirect";
 import { getAllPosts } from "../components/posts/Posts/postsAction";
 
@@ -19,15 +18,12 @@ class Home extends Component {
   static async getInitialProps({ res, store, isServer, pathname, query, req }) {
     // if (isServer) {
     //   // await Promise.all([
-    //   //   store.dispatch(getAllLevels()),
     //   //   store.dispatch(getProfile())
     //   // ]);
-    //   await store.dispatch(getAllLevels());
     //   await store.dispatch(getProfile());
     // }
     if (isServer) {
       await store.dispatch(getProfile());
-      await store.dispatch(getAllLevels());
       await store.dispatch(getAllPosts());
     }
 
@@ -46,7 +42,8 @@ class Home extends Component {
     this.props.getAllPosts();
   }
   render() {
-    const { levels, title, description, profile, posts } = this.props;
+    const { title, description, profile, posts } = this.props;
+
     return (
       <Container>
         <Segment>
@@ -69,7 +66,6 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    levels: state.levels.levels,
     profile: state.profile,
     posts: state.posts.posts
   };
@@ -77,5 +73,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getAllLevels, getProfile, getAllPosts }
+  { getProfile, getAllPosts }
 )(Home);

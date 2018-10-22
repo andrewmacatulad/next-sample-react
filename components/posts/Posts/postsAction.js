@@ -14,13 +14,16 @@ export const createPost = (values, file) => async (dispatch, getState, api) => {
   //   console.log("Action ", getState().profile.user._id);
   dispatch(asyncActionStart());
 
+  console.log(file);
   const uploadConfig = await api.get("/api/upload");
-
+  console.log(uploadConfig);
   const upload = await api.put(uploadConfig.data.url, file, {
     headers: {
       "Content-Type": file.type
     }
   });
+
+  console.log(upload);
 
   try {
     const post = await api.post("/api/post", {
@@ -95,7 +98,7 @@ export const getPostByCategory = (categoryId, postId) => async (
   dispatch(asyncActionStart());
 
   try {
-    const post = await api.get(`/api/:${categoryId}/:${postId}`);
+    const post = await api.get(`/api/download/:${categoryId}/:${postId}`);
 
     dispatch({
       type: GET_POST_BY_CATEGORY,
@@ -116,7 +119,7 @@ export const getAllPostsInCategory = catSlug => async (
   console.log("Action slug ", catSlug);
 
   try {
-    const post = await api.get(`/api/${catSlug}`);
+    const post = await api.get(`/api/download/${catSlug}`);
     //console.log(post);
     dispatch({
       type: GET_POSTS,

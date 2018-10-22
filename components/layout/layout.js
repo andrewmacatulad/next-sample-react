@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getAllLevels, getProfile } from "../../actions";
+import { getProfile } from "../../actions";
 import { getCategory } from "../posts/Category/categoryAction";
 import { getTags } from "../posts/Tags/tagsAction";
 import LoadingComponent from "./LoadingComponent";
@@ -9,7 +9,6 @@ import NavBar from "../Navbar/NavBar";
 import { getAllPosts } from "../posts/Posts/postsAction";
 class Layout extends Component {
   componentDidMount() {
-    this.props.getAllLevels();
     this.props.getProfile();
     this.props.getCategory();
     this.props.getTags();
@@ -30,7 +29,6 @@ class Layout extends Component {
 const mapStateToProps = state => {
   return {
     profile: state.profile,
-    levels: state.levels.levels,
     category: state.category,
     tags: state.tags
   };
@@ -38,5 +36,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getAllLevels, getProfile, getCategory, getTags, getAllPosts }
+  { getProfile, getCategory, getTags, getAllPosts }
 )(Layout);

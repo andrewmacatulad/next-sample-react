@@ -4,7 +4,6 @@ import { Button } from "semantic-ui-react";
 import Router from "next/router";
 // import { Link } from "../routes";
 import Link from "next/link";
-import { getAllLevels } from "../actions";
 import redirect from "../lib/redirect";
 import require_auth from "../lib/require_auth";
 
@@ -48,10 +47,7 @@ class Test extends Component {
 
 const mapStateToProps = state => {
   console.log(state.profile);
-  return { levels: state.levels.levels, profile: state.profile };
+  return { profile: state.profile };
 };
 
-export default connect(
-  mapStateToProps,
-  { getAllLevels }
-)(Test);
+export default connect(mapStateToProps)(Test);

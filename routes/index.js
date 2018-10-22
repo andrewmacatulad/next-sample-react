@@ -3,11 +3,11 @@ const routes = (module.exports = nextRoutes());
 
 routes.add("post", "/post", "test");
 routes.add("posts", "/posts", "posts");
-routes.add("postsNew", "/post/new", "post/new");
-// routes.add("postsEdit", "/post/edit", "post/edit");
+routes.add("postsNew", "/post/add", "post/add");
+routes.add("postsEdit", "/post/edit", "post/edit");
 routes.add("blogtest", "/blog", "test");
 routes.add("blog", "/blog/:samples");
-routes.add("postedit", "/blog/:samples/edit", "post/edit");
+// routes.add("postedit", "/blog/:samples/edit", "post/edit");
 
 // routes.add("posttest", "/category/:categ/:posttitle");
 
