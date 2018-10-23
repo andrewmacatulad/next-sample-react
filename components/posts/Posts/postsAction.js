@@ -47,6 +47,36 @@ export const createPost = (values, file) => async (dispatch, getState, api) => {
   }
 };
 
+export const createPostWithoutImage = values => async (
+  dispatch,
+  getState,
+  api
+) => {
+  //   console.log(values);
+  //   console.log("Action ", getState().profile.user._id);
+  dispatch(asyncActionStart());
+
+  try {
+    const post = await api.post("/api/post", {
+      user: getState().profile.user._id,
+      postTitle: values.postTitle,
+      postDescription: values.postDescription,
+      postCategory: values.postCategory,
+      postTags: values.postTags,
+      postDownloadLinks: values.postDownloadLinks,
+      postHdDownloadLinks: values.postHdDownloadLinks,
+      postStreamLinks: values.postStreamLinks,
+      postSubsLinks: values.postSubsLinks,
+      postSubtitle: values.postSubtitle
+    });
+
+    console.log("Success ", post);
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(asyncActionError());
+  }
+};
+
 export const editPost = (values, postId) => async (dispatch, getState, api) => {
   //   console.log(values);
   //   console.log("Action ", getState().profile.user._id);

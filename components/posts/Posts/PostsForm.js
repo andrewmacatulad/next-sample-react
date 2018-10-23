@@ -13,7 +13,7 @@ import { Router } from "../../../routes";
 
 import LoadingComponent from "../../layout/LoadingComponent";
 import isEmpty from "../../../lib/validation/is-empty";
-import { createPost } from "./postsAction";
+import { createPost, createPostWithoutImage } from "./postsAction";
 
 const { Form: SemanticForm, Segment, Button, Image, Label } = Semantic;
 
@@ -43,9 +43,14 @@ const downloadTypes = [
 class PostForm extends Component {
   state = { preview: "" };
   onSubmit = async values => {
-    // console.log(values);
-    await this.props.createPost(values, values.postFile[0]);
-    // Router.replace("/");
+    if (values.postFile[0] === undefined) {
+      await this.props.createPostWithoutImage(values);
+    } else {
+      await this.props.createPost(values, values.postFile[0]);
+    }
+    //console.log("File ", values.postFile[0]);
+    // await this.props.createPost(values, values.postFile[0]);
+    Router.replace("/");
   };
   // onChange = e => {
   //   console.log(e[0].preview);
@@ -87,7 +92,8 @@ class PostForm extends Component {
           onSubmit={this.onSubmit}
           initialValues={{
             postType: "series",
-            postDownloadType: "episodes"
+            postDownloadType: "episodes",
+            postFile: ""
           }}
           render={({
             form,
@@ -120,7 +126,7 @@ class PostForm extends Component {
                 //   />
                 // </div>
                 <div>
-                  <Field name="postFile">
+                  <Field name="postFile" allowNull={true}>
                     {fieldprops => (
                       <div>
                         <label>File</label>
@@ -281,5 +287,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { createPost }
+  { createPost, createPostWithoutImage }
 )(PostForm);
