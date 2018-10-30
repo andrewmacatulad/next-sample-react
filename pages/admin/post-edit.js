@@ -38,18 +38,13 @@ class PostEdit extends Component {
       await store.dispatch(getTags());
     }
 
-    console.log(query);
     const postsList = store.getState().posts.posts;
-
-    const post = await postsList.find(post => post.postSlug === query.samples);
-
+    const post = await postsList.find(
+      post => post.postSlug === query.posttitle
+    );
     if (!post && res) {
       res.statusCode = 404;
     }
-    // categories: state.category, tags: state.tags
-    // console.log("Query ", query.samples);
-    // console.log("Edit post", post);
-
     const { profile, category, tags } = store.getState();
     return { post, user: profile.user, categories: category, tags };
   }
@@ -63,11 +58,10 @@ class PostEdit extends Component {
     const tagsList = [];
     const categoryList = [];
 
-    if (!post) return <h1>Post not found</h1>;
+    if (!post) return <h1>No Post to edit</h1>;
     if (!user.admin)
       return <h1>You didn't have privilege to access the page</h1>;
 
-    console.log(post._id);
     tags.tags.map(tag => {
       return tagsList.push({ key: tag.name, value: tag._id, text: tag.name });
     });
@@ -178,3 +172,17 @@ export default connect(
   null,
   { editPost }
 )(PostEdit);
+
+// import React, { Component } from "react";
+
+// class PostEdit extends Component {
+//   render() {
+//     return (
+//       <div>
+//         <h2>Test Edit</h2>
+//       </div>
+//     );
+//   }
+// }
+
+// export default PostEdit;

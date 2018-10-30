@@ -52,7 +52,7 @@ class DownloadList extends Component {
   render() {
     const { posts, categParams } = this.props;
 
-    if (posts.length === 0) return <h1>Post not found</h1>;
+    if (posts.length === 0) return <h2>No Post found for this Category</h2>;
 
     return <PostList posts={posts} categP={categParams} />;
   }

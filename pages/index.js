@@ -60,6 +60,19 @@ class Home extends Component {
               })}
           </Card.Group>
         </Segment>
+        <Segment>
+          <Header as="h2">Japanese Drama</Header>
+          <Helmet>
+            <title>{title}</title>
+            <meta name="description" content={`${title} - ${description}`} />
+          </Helmet>
+          <Card.Group itemsPerRow={5} stackable>
+            {posts &&
+              posts.map(post => {
+                return <HomePage key={post._id} post={post} />;
+              })}
+          </Card.Group>
+        </Segment>
       </Container>
     );
   }

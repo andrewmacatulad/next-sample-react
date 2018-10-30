@@ -1,4 +1,8 @@
 const slug = require("slug");
+const moment = require("moment");
+const MongoPaging = require("mongo-cursor-pagination");
+const mongoist = require("mongoist");
+
 const mongoose = require("mongoose");
 
 const Category = mongoose.model("category");
@@ -175,6 +179,177 @@ module.exports = app => {
       .exec();
     console.log(post.length);
     res.send(post);
+  });
+
+  app.get("/api/pagination", async (req, res) => {
+    // const post = await Post.paginate({
+    //   paginatedField: "postTitle",
+    //   limit: 3
+    // });
+
+    // console.log(post.results);
+    // res.json(post);
+
+    let post = await Post.paginate({
+      paginatedField: "postTitle",
+      limit: 2
+    });
+
+    if (req.query.next) {
+      post = await Post.paginate({
+        paginatedField: "postTitle",
+        limit: 2,
+        next: req.query.next
+      });
+    }
+
+    res.json(post);
+
+    // let post = await Post.paginate({
+    //   paginatedField: "postTitle",
+    //   limit: 2
+    // });
+
+    // console.log("Post ", post);
+    // if (req.query.next) {
+    //   post = await Post.paginate({
+    //     paginatedField: "postTitle",
+    //     limit: 2,
+    //     next: post.next
+    //   });
+    // }
+
+    // console.log("Next Post", post);
+    // res.json(post);
+
+    // Mongodb plugin
+    // const db = mongoist("mongodb://localhost:27017/next-project-site");
+    // let post = await MongoPaging.find(db.collection("posts"), { limit: 2 });
+
+    // if (req.query.next) {
+    //   post = await MongoPaging.find(db.collection("posts"), {
+    //     limit: 2,
+    //     next: req.query.next
+    //   });
+    // }
+    // res.json(post);
+
+    // post = MongoPaging.find(db.collection('myobjects'), {
+    //   limit: 2,
+    //   next: result.next // This queries the next page
+    // });
+
+    // const { skip, limit, page } = req.query;
+    // const { page } = req.query;
+
+    // const d = moment(Date.now()).subtract(2, "days");
+
+    // const limit = 3;
+    // console.log(Date.now());
+    // console.log(moment(Date.now()).subtract(5, "days"));
+    // try {
+    //   const post = await Post.find({ date: { $lte: d } })
+    //     .skip((parseInt(page) - 1) * parseInt(limit))
+    //     .limit(parseInt(limit))
+    //     .sort("-date");
+
+    //   if (post.length === 0) {
+    //     return res.json({ results: [], next: false });
+    //   }
+    //   res.json({ results: post, page: parseInt(page), next: true });
+    // } catch (err) {
+    //   throw err;
+    // }
+
+    // try {
+    //   // const posts = await Post.find({ _id: { $lt: req.query.next } })
+
+    //   if (!req.query.next) {
+    //     const posts = await Post.find()
+    //       .sort({
+    //         _id: -1
+    //       })
+    //       .limit(2);
+    //     console.log("Next Posts ", posts[posts.length - 1]);
+    //     const nextPost = posts[posts.length - 1]._id;
+    //     return res.json({ posts, nextPost });
+    //   } else if (req.query.next) {
+    //     const posts = await Post.find({ _id: { $lt: req.query.next } })
+    //       .sort({
+    //         _id: -1
+    //       })
+    //       .limit(2);
+
+    //     console.log("Next Posts ", posts[posts.length - 1]);
+    //     const nextPost = posts[posts.length - 1]._id;
+    //     return res.json({ posts, nextPost });
+    //   }
+
+    //   // if (post.length === 0) {
+    //   //   return res.json({ results: [], next: false });
+    //   // }
+    //   // res.json({ results: post, page: parseInt(page), next: true });
+    // } catch (err) {
+    //   throw err;
+    // }
+
+    // console.log(offset, limit);
+    // const post = await Post.find()
+    //   .select("postTitle")
+    //   .limit(limit)
+    //   .skip(offset)
+    //   .exec();
+
+    // const post = await Post.find(
+    //   {},
+    //   {},
+    //   { skip: parseInt(skip), limit: parseInt(limit) },
+    //   function(err, docs) {
+    //     if (!err) {
+    //       res.json({ users: docs, next: 0 });
+    //     } else {
+    //       throw err;
+    //     }
+    //   }
+    // );
+
+    // try {
+    //   const post = await Post.find(
+    //     {},
+    //     {},
+    //     { skip: (parseInt(page) - 1) * parseInt(limit), limit: parseInt(limit) }
+    //   );
+
+    //   if (post.length === 0) {
+    //     return res.json({ results: [], next: false });
+    //   }
+    //   res.json({ results: post, page: parseInt(page), next: true });
+    // } catch (err) {
+    //   throw err;
+    // }
+  });
+
+  app.get("/sample/pagination", async (req, res) => {
+    if (!req.query.next) {
+      const posts = await Post.find()
+        .sort({
+          _id: -1
+        })
+        .limit(2);
+      console.log("Next Posts ", posts[posts.length - 1]);
+      const nextPost = posts[posts.length - 1]._id;
+    } else if (req.query.next) {
+      const posts = await Post.find({ _id: { $lt: req.query.next } })
+        .sort({
+          _id: -1
+        })
+        .limit(2);
+
+      console.log("Next Posts ", posts[posts.length - 1]);
+      const nextPost = posts[posts.length - 1]._id;
+    }
+
+    return res.json({ posts, nextPost });
   });
   // app.get("/sample", (req, res) => {
   //   console.log(slug("Test lan zxxc D ada123 zcx. ? @! as", { lower: true }));

@@ -29,7 +29,7 @@ export default class extends React.Component {
       Helmet.renderStatic();
     }
 
-    console.log("TEst Post", query);
+    console.log(query, query.posttitle);
     const postsList = store.getState().posts.posts;
     const post = await postsList.find(
       post => post.postSlug === query.posttitle
@@ -81,6 +81,7 @@ export default class extends React.Component {
       });
     }
 
+    console.log(params);
     return (
       <Segment>
         <Container>
@@ -109,7 +110,7 @@ export default class extends React.Component {
           )}
 
           {user.admin ? (
-            <Link href={`/blog/${params}/edit`}>
+            <Link href={`/admin/${params}/edit`}>
               <Button>Edit</Button>
             </Link>
           ) : (

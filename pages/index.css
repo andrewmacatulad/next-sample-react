@@ -11,3 +11,37 @@ body {
   margin: 0;
   padding: 0;
 }
+/* 
+.ui.medium.images {
+  height: 50px;
+}
+.ui.fluid.image {
+  height: 50px; 
+}
+
+.ui.medium.image {
+  height: 50px; 
+} */
+
+/* .ui.medium.image,
+.ui.medium.images .image,
+.ui.medium.images img,
+.ui.medium.images svg {
+  width: 300px;
+  height: 300px;
+  font-size: 1rem;
+} */
+
+/* .ui.medium.image,
+.ui.medium.images .image,
+.ui.medium.images img,
+.ui.medium.images svg {
+  width: 300px;
+  height: 300px;
+  font-size: 1rem;
+} */
+
+.ui.medium.test.image {
+  width: 300px;
+  height: 200px;
+}

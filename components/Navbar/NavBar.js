@@ -81,7 +81,7 @@ class NavBar extends Component {
               </Link>
             </Menu.Item>
             <Menu.Item>
-              <Link href="/post/add">
+              <Link href="/admin/post-add">
                 <Menu.Item as="a">Add Post</Menu.Item>
               </Link>
             </Menu.Item>
@@ -93,16 +93,6 @@ class NavBar extends Component {
             <Menu.Item>
               <Link href="/tags">
                 <Menu.Item as="a">Tags</Menu.Item>
-              </Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link href="/posts">
-                <Menu.Item as="a">Post List</Menu.Item>
-              </Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link route="blog" params={{ samples: "another-blog-post" }}>
-                <Menu.Item as="a">Blog Test</Menu.Item>
               </Link>
             </Menu.Item>
             <Menu.Item color="red">
