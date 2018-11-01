@@ -67,7 +67,11 @@ const PostSchema = new Schema({
   updatedDate: {
     type: Date
   },
-  date: {
+  dateCreated: {
+    type: Date,
+    default: Date.now
+  },
+  dateModified: {
     type: Date,
     default: Date.now
   }

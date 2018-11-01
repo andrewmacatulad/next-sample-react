@@ -62,6 +62,7 @@ export default class MyDocument extends Document {
             href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"
           />
         </Head>
+
         <body {...this.helmetBodyAttrComponents}>
           <Main />
           <NextScript />

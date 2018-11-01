@@ -6,6 +6,10 @@ import {
 } from "../../async/asyncActions";
 
 export const GET_POSTS = "GET_POSTS";
+export const GET_FEATURED_POSTS_ONE = "GET_FEATURED_POSTS_ONE";
+export const GET_FEATURED_POSTS_TWO = "GET_FEATURED_POSTS_TWO";
+export const GET_FEATURED_POSTS_THREE = "GET_FEATURED_POSTS_THREE";
+export const GET_FEATURED_POSTS_FOUR = "GET_FEATURED_POSTS_FOUR";
 export const GET_POST_BY_CATEGORY = "GET_POST_BY_CATEGORY";
 export const GET_POSTS_BY_CATEGORY = "GET_POSTS_BY_CATEGORY";
 
@@ -98,6 +102,86 @@ export const editPost = (values, postId) => async (dispatch, getState, api) => {
     });
 
     console.log("Successfully updated the post", post);
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(asyncActionError());
+  }
+};
+
+export const getFeaturedPostsOne = categId => async (
+  dispatch,
+  getState,
+  api
+) => {
+  dispatch(asyncActionStart());
+
+  try {
+    const posts = await api.get(`/api/featured-posts/${categId}`);
+
+    dispatch({
+      type: GET_FEATURED_POSTS_ONE,
+      payload: posts.data
+    });
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(asyncActionError());
+  }
+};
+
+export const getFeaturedPostsTwo = categId => async (
+  dispatch,
+  getState,
+  api
+) => {
+  dispatch(asyncActionStart());
+
+  try {
+    const posts = await api.get(`/api/featured-posts/${categId}`);
+
+    dispatch({
+      type: GET_FEATURED_POSTS_TWO,
+      payload: posts.data
+    });
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(asyncActionError());
+  }
+};
+
+export const getFeaturedPostsThree = categId => async (
+  dispatch,
+  getState,
+  api
+) => {
+  dispatch(asyncActionStart());
+
+  try {
+    const posts = await api.get(`/api/featured-posts/${categId}`);
+
+    dispatch({
+      type: GET_FEATURED_POSTS_THREE,
+      payload: posts.data
+    });
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(asyncActionError());
+  }
+};
+
+export const getFeaturedPostsFour = categId => async (
+  dispatch,
+  getState,
+  api
+) => {
+  dispatch(asyncActionStart());
+
+  try {
+    const posts = await api.get(`/api/featured-posts/${categId}`);
+
+    dispatch({
+      type: GET_FEATURED_POSTS_FOUR,
+      payload: posts.data
+    });
     dispatch(asyncActionFinish());
   } catch (err) {
     dispatch(asyncActionError());

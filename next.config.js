@@ -87,6 +87,7 @@
 //     // }
 //   })
 // );
+
 const withCss = require("@zeit/next-css");
 const withOffline = require("next-offline");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");

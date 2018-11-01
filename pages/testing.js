@@ -5,10 +5,8 @@ import Router from "next/router";
 // import { Link } from "../routes";
 import Link from "next/link";
 import { Segment, Image, Card, Container } from "semantic-ui-react";
-import CarouselSample from "../components/carousel/CarouselPage";
 import Carousel from "nuka-carousel";
 // import Slider from "react-slick";
-import Slider from "react-animated-slider";
 import { getAllPosts } from "../components/posts/Posts/postsAction";
 
 class Test extends Component {

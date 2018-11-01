@@ -69,6 +69,22 @@ module.exports = app => {
     }
   });
 
+  app.get("/api/featured-posts/:categ", async (req, res) => {
+    const { categ } = req.params;
+    console.log(categ);
+    try {
+      const posts = await Post.find({
+        postCategory: categ
+      })
+        .limit(5)
+        .sort("-date")
+        .exec();
+      res.send(posts);
+    } catch (err) {
+      res.send(400, err);
+    }
+  });
+
   app.get("/api/posts", async (req, res) => {
     try {
       const posts = await Post.find({})
