@@ -2,17 +2,16 @@ import React, { Component } from "react";
 import { Segment, Card, Header, Container } from "semantic-ui-react";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import HomePage from "../components/home/HomePage";
-import { Link, Router } from "../routes";
 
-// import Link from "next/link";
-// import Router from "next/router";
-// import { Link, Router } from "../routes";
-import { getProfile, GET_PROFILE } from "../actions";
-import redirect from "../lib/redirect";
-import { getAllPosts } from "../components/posts/Posts/postsAction";
+import {
+  getAllPosts,
+  getFeaturedPostsOne,
+  getFeaturedPostsTwo,
+  getFeaturedPostsThree
+} from "../components/posts/Posts/postsAction";
+import { getCategory } from "../components/posts/Category/categoryAction";
 
 class Home extends Component {
   static async getInitialProps({ res, store, isServer, pathname, query, req }) {
@@ -23,31 +22,63 @@ class Home extends Component {
     //   await store.dispatch(getProfile());
     // }
     if (isServer) {
-      await store.dispatch(getProfile());
-      await store.dispatch(getAllPosts());
+      await store.dispatch(getCategory());
+      await Promise.all([
+        store.dispatch(
+          getFeaturedPostsOne(store.getState().category.category[1]._id)
+        ),
+        store.dispatch(
+          getFeaturedPostsTwo(store.getState().category.category[2]._id)
+        ),
+        store.dispatch(
+          getFeaturedPostsThree(store.getState().category.category[0]._id)
+        )
+      ]);
+
       // await store.dispatch(getAllPostsInCategory("korean-drama"));
     }
-
-    //console.log(req.headers.cookie);
 
     if (req) {
       Helmet.renderStatic();
     }
 
-    const postList = store.getState().posts.posts;
+    // const postList = store.getState().posts.posts;
     //console.log("State", store.getState().posts.posts);
 
-    return { title: "Home", description: "Test lang po", posts: postList };
+    return {
+      title: "Home",
+      description: "Test lang po",
+      // posts: postList,
+      featured1: store.getState().posts.featured_posts1,
+      featured2: store.getState().posts.featured_posts2,
+      featured3: store.getState().posts.featured_posts3
+    };
   }
-  componentDidMount() {
-    this.props.getAllPosts();
+  async componentDidMount() {
+    const {
+      getFeaturedPostsOne,
+      getFeaturedPostsTwo,
+      getFeaturedPostsThree,
+      category
+    } = this.props;
+
+    await getFeaturedPostsOne(category[1]._id);
+    await getFeaturedPostsTwo(category[2]._id);
+    await getFeaturedPostsThree(category[0]._id);
   }
   render() {
-    const { title, description, profile, posts } = this.props;
-
+    const {
+      title,
+      description,
+      profile,
+      // posts,
+      featured1,
+      featured2,
+      featured3
+    } = this.props;
     return (
       <Container>
-        <Segment>
+        {/* <Segment>
           <Header as="h2">Korean Drama</Header>
           <Helmet>
             <title>{title}</title>
@@ -59,7 +90,34 @@ class Home extends Component {
                 return <HomePage key={post._id} post={post} />;
               })}
           </Card.Group>
+        </Segment> */}
+        <Segment>
+          <Header as="h2">Korean Drama</Header>
+          <Helmet>
+            <title>{title}</title>
+            <meta name="description" content={`${title} - ${description}`} />
+          </Helmet>
+          <Card.Group itemsPerRow={5} stackable>
+            {featured3 &&
+              featured3.map(featured3 => {
+                return <HomePage key={featured3._id} post={featured3} />;
+              })}
+          </Card.Group>
         </Segment>
+        <Segment>
+          <Header as="h2">Korean Movies</Header>
+          <Helmet>
+            <title>{title}</title>
+            <meta name="description" content={`${title} - ${description}`} />
+          </Helmet>
+          <Card.Group itemsPerRow={5} stackable>
+            {featured1 &&
+              featured1.map(featured1 => {
+                return <HomePage key={featured1._id} post={featured1} />;
+              })}
+          </Card.Group>
+        </Segment>
+
         <Segment>
           <Header as="h2">Japanese Drama</Header>
           <Helmet>
@@ -67,9 +125,9 @@ class Home extends Component {
             <meta name="description" content={`${title} - ${description}`} />
           </Helmet>
           <Card.Group itemsPerRow={5} stackable>
-            {posts &&
-              posts.map(post => {
-                return <HomePage key={post._id} post={post} />;
+            {featured2 &&
+              featured2.map(featured2 => {
+                return <HomePage key={featured2._id} post={featured2} />;
               })}
           </Card.Group>
         </Segment>
@@ -80,12 +138,19 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    profile: state.profile,
-    posts: state.posts.posts
+    category: state.category.category,
+    featured1: state.posts.featured_posts1,
+    featured2: state.posts.featured_posts2,
+    featured3: state.posts.featured_posts3
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getProfile, getAllPosts }
+  {
+    getFeaturedPostsOne,
+    getFeaturedPostsTwo,
+    getFeaturedPostsThree,
+    getCategory
+  }
 )(Home);

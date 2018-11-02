@@ -8,11 +8,11 @@ import LoadingComponent from "./LoadingComponent";
 import NavBar from "../Navbar/NavBar";
 import { getAllPosts } from "../posts/Posts/postsAction";
 class Layout extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     // this.props.getAllPosts();
-    this.props.getProfile();
-    this.props.getCategory();
-    this.props.getTags();
+    await this.props.getProfile();
+    await this.props.getCategory();
+    await this.props.getTags();
   }
   render() {
     if (!this.props.profile) {

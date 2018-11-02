@@ -22,11 +22,8 @@ module.exports = app => {
   app.post("/api/category", async (req, res) => {
     const { name } = req.body;
 
-    console.log(name);
-
     const categorySlug = slug(name, { lower: true });
 
-    console.log(categorySlug);
     const category = new Category({
       name,
       slug: categorySlug
@@ -52,8 +49,6 @@ module.exports = app => {
   app.post("/api/tags", async (req, res) => {
     const { name } = req.body;
 
-    console.log(name);
-
     const tagsSlug = slug(name, { lower: true });
 
     const tags = new Tags({
@@ -71,13 +66,13 @@ module.exports = app => {
 
   app.get("/api/featured-posts/:categ", async (req, res) => {
     const { categ } = req.params;
-    console.log(categ);
     try {
       const posts = await Post.find({
         postCategory: categ
       })
         .limit(5)
         .sort("-date")
+        .populate("postCategory")
         .exec();
       res.send(posts);
     } catch (err) {
@@ -183,7 +178,6 @@ module.exports = app => {
 
   app.get("/api/download/:catSlug", async (req, res) => {
     const { catSlug } = req.params;
-    console.log(catSlug);
     const cat = await Category.find({ slug: catSlug });
 
     if (cat.length === 0) {
