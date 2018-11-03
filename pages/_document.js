@@ -43,6 +43,7 @@ export default class MyDocument extends Document {
     return (
       <html lang="en" {...this.helmetHtmlAttrComponents}>
         <Head>
+          <link rel="manifest" href="static/manifest.json" />
           {this.helmetJsx}
           {this.helmetHeadComponents}
           {/* <link rel="stylesheet" href="/_next/static/style.css" /> */}
@@ -57,6 +58,7 @@ export default class MyDocument extends Document {
             type="text/css"
             href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
           /> */}
+
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"

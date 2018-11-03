@@ -112,7 +112,26 @@ module.exports = withOffline(
           }
         }
       });
-
+      workboxOpts: {
+        runtimeCaching: [
+          {
+            urlPattern: /.png$/,
+            handler: "cacheFirst"
+          },
+          {
+            urlPattern: /api/,
+            handler: "networkFirst",
+            options: {
+              cacheableResponse: {
+                statuses: [0, 200],
+                headers: {
+                  "x-test": "true"
+                }
+              }
+            }
+          }
+        ];
+      }
       // config.plugins.push(
       //   new SWPrecacheWebpackPlugin({
       //     verbose: true,
@@ -146,7 +165,7 @@ module.exports = withOffline(
             },
             icons: [
               {
-                src: path.resolve("static/favicon.ico"),
+                src: path.resolve("static/1.png"),
                 sizes: [96, 128, 192, 256, 384, 512],
                 destination: "/static"
               }
@@ -156,6 +175,7 @@ module.exports = withOffline(
           })
         );
       }
+
       config.plugins = [
         ...config.plugins,
 
@@ -177,3 +197,80 @@ module.exports = withOffline(
     // }
   })
 );
+
+// const withCss = require("@zeit/next-css");
+
+// const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
+
+// const path = require("path");
+// require("dotenv").config();
+// const Dotenv = require("dotenv-webpack");
+
+// module.exports = withCss({
+//   webpack: (config, { dev }) => {
+//     config.module.rules.push({
+//       test: /\.(png|svg|eot|otf|ttf|woff|woff2)$/,
+//       use: {
+//         loader: "url-loader",
+//         options: {
+//           limit: 100000,
+//           publicPath: "./",
+//           outputPath: "static/",
+//           name: "[name].[ext]"
+//         }
+//       }
+//     });
+
+//     // config.entry = () =>
+//     //   oldEntry().then(entry => {
+//     //     entry["server.js"].push(path.resolve("./utils/offline"));
+//     //     return entry;
+//     //   });
+//     // const configEntry = config.entry;
+//     // config.entry = async () => {
+//     //   const entry = await configEntry();
+//     //   entry["main.js"].push("test");
+//     //   return entry;
+//     // };
+//     const oldEntry = config.entry;
+
+//     config.entry = () =>
+//       oldEntry().then(entry => {
+//         entry["main.js"] &&
+//           entry["main.js"].push(path.resolve("./utils/offline"));
+//         return entry;
+//       });
+//     if (!dev) {
+//       config.plugins.push(
+//         new SWPrecacheWebpackPlugin({
+//           cacheId: "test-lighthouse",
+//           filepath: path.resolve("./static/sw.js"),
+//           staticFileGlobs: ["static/**/*"],
+//           minify: true,
+//           staticFileGlobsIgnorePatterns: [/\.next\//],
+//           runtimeCaching: [
+//             {
+//               handler: "fastest",
+//               urlPattern: /[.](png|jpg|css)/
+//             },
+//             {
+//               handler: "networkFirst",
+//               urlPattern: /^http.*/
+//             }
+//           ]
+//         })
+//       );
+//     }
+
+//     config.plugins = [
+//       ...config.plugins,
+
+//       // Read the .env file
+//       new Dotenv({
+//         path: path.join(__dirname, ".env"),
+//         systemvars: true
+//       })
+//     ];
+//     return config;
+//   }
+// });
