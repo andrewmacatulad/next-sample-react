@@ -5,7 +5,6 @@ import Router from "next/router";
 // import { Link } from "../routes";
 import Link from "next/link";
 import redirect from "../lib/redirect";
-import require_auth from "../lib/require_auth";
 
 class Test extends Component {
   static getInitialProps({ res, isServer, req }) {

@@ -16,3 +16,5 @@ routes.add("postedit", "/admin/:posttitle/edit", "admin/post-edit");
 
 // Add Edit Category
 routes.add("categoryAdd", "/admin/category-add", "admin/category-add");
+
+routes.add("admin", "/admin", "admin/index");
