@@ -9,7 +9,7 @@ import NavBar from "../Navbar/NavBar";
 import { getAllPosts } from "../posts/Posts/postsAction";
 class Layout extends Component {
   async componentDidMount() {
-    // this.props.getAllPosts();
+    await this.props.getAllPosts();
     await this.props.getProfile();
     await this.props.getCategory();
     await this.props.getTags();
@@ -18,6 +18,7 @@ class Layout extends Component {
     if (!this.props.profile) {
       return <LoadingComponent />;
     }
+
     return (
       <div>
         <NavBar />
@@ -31,7 +32,8 @@ const mapStateToProps = state => {
   return {
     profile: state.profile,
     category: state.category,
-    tags: state.tags
+    tags: state.tags,
+    loading: state.async
   };
 };
 

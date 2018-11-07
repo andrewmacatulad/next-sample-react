@@ -17,8 +17,10 @@ import {
   getAllPostsInCategory
 } from "../../components/posts/Posts/postsAction";
 import { getProfile } from "../../actions";
+import { connect } from "react-redux";
+import LoadingComponent from "../../components/layout/LoadingComponent";
 
-export default class extends React.Component {
+class DownloadPage extends React.Component {
   static async getInitialProps({ req, isServer, query, res, store }) {
     if (isServer) {
       await store.dispatch(getAllPosts());
@@ -47,12 +49,17 @@ export default class extends React.Component {
   }
 
   render() {
-    const { post, user, params } = this.props;
+    const { post, user, params, loading } = this.props;
+    if (loading) {
+      return <LoadingComponentt />;
+    }
     if (!post) return <h1>Post not found</h1>;
-
+    if (loading) {
+      return <h1>Loading...</h1>;
+    }
     const HdLinks = [];
     const StreamLinks = [];
-    console.log(post.postHdDownloadLinks !== undefined);
+
     if (post.postHdDownloadLinks !== undefined) {
       post.postHdDownloadLinks.split("\n").map((item, i) => {
         // return (
@@ -81,7 +88,6 @@ export default class extends React.Component {
       });
     }
 
-    console.log(params);
     return (
       <Segment>
         <Container>
@@ -205,3 +211,8 @@ export default class extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { loading: state.async.loading };
+};
+export default connect(mapStateToProps)(DownloadPage);

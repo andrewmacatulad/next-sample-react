@@ -42,21 +42,20 @@ class NavBar extends Component {
       <div>
         <Head>
           <meta charSet="UTF-8" />
-          <link rel="manifest" href="/_next/static/manifest.json" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#302ecd" />
         </Head>
         <Menu stackable inverted size="massive">
           <Container>
             <Menu.Item as="h1" header>
-              <Link href="/">
+              <Link href="/" prefetch>
                 <Menu.Item as="a">Next Site</Menu.Item>
               </Link>
             </Menu.Item>
 
             {!user.isAuthenticated ? (
               <Menu.Item>
-                <Link href="/auth/google">
+                <Link href="/auth/google" prefetch>
                   <Menu.Item as="a">Logged In</Menu.Item>
                 </Link>
               </Menu.Item>
@@ -76,22 +75,22 @@ class NavBar extends Component {
             <Menu.Item disabled name="Equipment" />
           )} */}
             <Menu.Item>
-              <Link href="/test">
+              <Link href="/test" prefetch>
                 <Menu.Item as="a">Test</Menu.Item>
               </Link>
             </Menu.Item>
             <Menu.Item>
-              <Link href="/admin/post-add">
+              <Link href="/admin/post-add" prefetch>
                 <Menu.Item as="a">Add Post</Menu.Item>
               </Link>
             </Menu.Item>
             <Menu.Item>
-              <Link href="/category">
+              <Link href="/category" prefetch>
                 <Menu.Item as="a">Category</Menu.Item>
               </Link>
             </Menu.Item>
             <Menu.Item>
-              <Link href="/tags">
+              <Link href="/tags" prefetch>
                 <Menu.Item as="a">Tags</Menu.Item>
               </Link>
             </Menu.Item>

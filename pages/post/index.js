@@ -99,7 +99,7 @@ export default class extends React.Component {
           )}
 
           {user.admin ? (
-            <Link href={`/blog/${params}/edit`}>
+            <Link href={`/blog/${params}/edit`} prefetch>
               <Button>Edit</Button>
             </Link>
           ) : (

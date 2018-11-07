@@ -32,6 +32,7 @@ const HomePage = ({ post }) => {
           <Link
             route="download"
             params={{ categ: post.postCategory.slug, posttitle: post.postSlug }}
+            prefetch
           >
             {/* <Menu.Item as="a">Blog Test</Menu.Item> */}
             {post.postTitle}

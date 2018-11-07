@@ -10,6 +10,7 @@ const PostListItem = ({ post, categP }) => {
       <Link
         route="download"
         params={{ categ: categP, posttitle: post.postSlug }}
+        prefetch
       >
         {/* <Menu.Item as="a">Blog Test</Menu.Item> */}
         <List.Item>{post.postTitle}</List.Item>

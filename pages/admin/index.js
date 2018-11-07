@@ -26,11 +26,11 @@ class AdminPage extends Component {
   render() {
     return (
       <Segment>
-        <Link href="/admin/post-add">
+        <Link href="/admin/post-add" prefetch>
           <Button>Add Post</Button>
         </Link>
 
-        <Link href="/admin/category-add">
+        <Link href="/admin/category-add" prefetch>
           <Button>Add Category</Button>
         </Link>
       </Segment>

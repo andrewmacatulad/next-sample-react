@@ -12,7 +12,7 @@ import {
   getFeaturedPostsThree
 } from "../components/posts/Posts/postsAction";
 import { getCategory } from "../components/posts/Category/categoryAction";
-
+import LoadingComponent from "../components/layout/LoadingComponent";
 class Home extends Component {
   static async getInitialProps({ res, store, isServer, pathname, query, req }) {
     // if (isServer) {
@@ -70,12 +70,15 @@ class Home extends Component {
     const {
       title,
       description,
-      profile,
-      // posts,
       featured1,
       featured2,
-      featured3
+      featured3,
+      loading
     } = this.props;
+
+    // if (loading) {
+    //   return <LoadingComponent />;
+    // }
     return (
       <Container>
         {/* <Segment>
@@ -141,7 +144,8 @@ const mapStateToProps = state => {
     category: state.category.category,
     featured1: state.posts.featured_posts1,
     featured2: state.posts.featured_posts2,
-    featured3: state.posts.featured_posts3
+    featured3: state.posts.featured_posts3,
+    loading: state.async.loading
   };
 };
 
