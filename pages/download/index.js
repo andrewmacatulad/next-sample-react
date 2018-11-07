@@ -51,12 +51,10 @@ class DownloadPage extends React.Component {
   render() {
     const { post, user, params, loading } = this.props;
     if (loading) {
-      return <LoadingComponentt />;
+      return <LoadingComponent />;
     }
     if (!post) return <h1>Post not found</h1>;
-    if (loading) {
-      return <h1>Loading...</h1>;
-    }
+
     const HdLinks = [];
     const StreamLinks = [];
 
