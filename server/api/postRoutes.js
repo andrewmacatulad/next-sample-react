@@ -187,7 +187,6 @@ module.exports = app => {
     const post = await Post.find({ postCategory: cat[0]._id })
       .populate("postCategory")
       .exec();
-    console.log(post.length);
     res.send(post);
   });
 
@@ -346,7 +345,6 @@ module.exports = app => {
           _id: -1
         })
         .limit(2);
-      console.log("Next Posts ", posts[posts.length - 1]);
       const nextPost = posts[posts.length - 1]._id;
     } else if (req.query.next) {
       const posts = await Post.find({ _id: { $lt: req.query.next } })
@@ -355,7 +353,6 @@ module.exports = app => {
         })
         .limit(2);
 
-      console.log("Next Posts ", posts[posts.length - 1]);
       const nextPost = posts[posts.length - 1]._id;
     }
 

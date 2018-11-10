@@ -5,10 +5,12 @@ import {
   GET_FEATURED_POSTS_THREE,
   GET_FEATURED_POSTS_FOUR,
   GET_POST_BY_CATEGORY,
-  GET_POSTS_BY_CATEGORY
+  GET_POSTS_BY_CATEGORY,
+  RESET_POSTS_BY_CATEGORY
 } from "./postsAction";
 const initialState = {
-  posts: []
+  posts: [],
+  post: []
 };
 
 export default function(state = initialState, action) {
@@ -19,6 +21,8 @@ export default function(state = initialState, action) {
     //   return { ...state, post: action.payload };
     case GET_POSTS_BY_CATEGORY:
       return { ...state, post: action.payload };
+    case RESET_POSTS_BY_CATEGORY:
+      return { ...state, post: [] };
     case GET_FEATURED_POSTS_ONE:
       return {
         ...state,

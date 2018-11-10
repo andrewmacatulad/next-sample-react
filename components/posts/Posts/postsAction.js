@@ -12,6 +12,7 @@ export const GET_FEATURED_POSTS_THREE = "GET_FEATURED_POSTS_THREE";
 export const GET_FEATURED_POSTS_FOUR = "GET_FEATURED_POSTS_FOUR";
 export const GET_POST_BY_CATEGORY = "GET_POST_BY_CATEGORY";
 export const GET_POSTS_BY_CATEGORY = "GET_POSTS_BY_CATEGORY";
+export const RESET_POSTS_BY_CATEGORY = "RESET_POSTS_BY_CATEGORY";
 
 export const createPost = (values, file) => async (dispatch, getState, api) => {
   //   console.log(values);
@@ -229,14 +230,14 @@ export const getAllPostsInCategory = catSlug => async (
   getState,
   api
 ) => {
+  dispatch(resetAllPostsInCategory());
   dispatch(asyncActionStart);
-  console.log("Action slug ", catSlug);
 
   try {
     const post = await api.get(`/api/download/${catSlug}`);
     //console.log(post);
     dispatch({
-      type: GET_POSTS,
+      type: GET_POSTS_BY_CATEGORY,
       payload: post.data
     });
 
@@ -244,4 +245,11 @@ export const getAllPostsInCategory = catSlug => async (
   } catch (err) {
     dispatch(asyncActionError());
   }
+};
+
+const resetAllPostsInCategory = () => async dispatch => {
+  console.log("Reset");
+  dispatch({
+    type: RESET_POSTS_BY_CATEGORY
+  });
 };

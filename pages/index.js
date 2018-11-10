@@ -76,6 +76,16 @@ class Home extends Component {
       loading
     } = this.props;
 
+    if (
+      typeof document !== "undefined" &&
+      loading &&
+      featured1.length === 0 &&
+      featured2 === 0 &&
+      featured3 === 0
+    ) {
+      return <LoadingComponent />;
+    }
+
     // if (loading) {
     //   return <LoadingComponent />;
     // }

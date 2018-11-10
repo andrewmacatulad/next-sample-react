@@ -55,7 +55,7 @@ class NavBar extends Component {
 
             {!user.isAuthenticated ? (
               <Menu.Item>
-                <Link href="/auth/google" prefetch>
+                <Link href="/auth/google">
                   <Menu.Item as="a">Logged In</Menu.Item>
                 </Link>
               </Menu.Item>
